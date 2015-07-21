@@ -10,7 +10,7 @@ Nodes Defined (2):
   * See the 3.3 Torrent Accessors section of the RPC-Spec (https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt)
 
 2. Transmission Add Torrent:
-  * Adds a new torrent via the config panel URL or msg.url value of a .torrent file or a magnet reference.</p>
-  * Returns a single instance of the RPC JSON data in msg.payload with a msg.topic of '/transmission.v1/torrentAdd'</p>
+  * Adds a new torrent via the config panel URL or msg.url value of a .torrent file or a magnet reference.
+  * Returns a single instance of the RPC JSON data in msg.payload with a msg.topic of '/transmission.v1/torrentAdd'
   * See the 3.3 Torrent Accessors section of the RPC-Spec (https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt)
 
