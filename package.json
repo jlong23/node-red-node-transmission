@@ -1,0 +1,29 @@
+{
+  "name": "node-red-node-transmission",
+  "version": "0.0.1",
+  "description": "A Node-RED node to access Transmission Remote API.",
+  "dependencies": {
+    "transmission": "0.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/node-red/node-red-nodes/tree/master/social/transmission"
+  },
+  "license": "Apache-v2.0",
+  "keywords": [
+    "node-red",
+    "transmission"
+  ],
+  "node-red": {
+    "nodes": {
+      "Transmission-API": "transmission.js"
+    }
+  },
+  "contributors": [
+    {
+      "name": "Jay Long"
+    }
+  ],
+  "readme": "node-red-node-transmission\n====================\n\n",
+  "readmeFilename": "README.md"  
+}

@@ -1,0 +1,101 @@
+<script type="text/x-red" data-template-name="transmission-config">
+    <div class="form-row">
+        <label for="node-config-input-hostname"><i class="fa fa-bookmark"></i>Host Name</label>
+        <input class="input-append-left" type="text" id="node-config-input-hostname" style="width: 40%;" >
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-portnum"><i class="fa fa-bookmark"></i>Port Num</label>
+        <input class="input-append-left" type="text" id="node-config-input-portnum" style="width: 40%;" >
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-username"><i class="fa fa-bookmark"></i>User</label>
+        <input class="input-append-left" type="text" id="node-config-input-username" style="width: 40%;" >
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-bookmark"></i>Password</label>
+        <input class="input-append-left" type="text" id="node-config-input-password" style="width: 40%;" >
+    </div>
+</script>
+
+<script type="text/javascript">
+(function() {
+    RED.nodes.registerType('transmission-config',{
+        category: 'config',
+        defaults: { },
+        credentials: {
+            hostname: {required:true},
+            portnum: {required:false},
+            username: {required:false},
+            password: {required:false}
+        },
+        label: function() {
+            return "Transmission API";
+        },
+        exportable: false,
+    });
+})();
+</script>
+
+
+<script type="text/x-red" data-template-name="Transmission List Torrents">
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-user"></i> Transmission API</label>
+        <input type="text" id="node-input-config">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Transmission List Torrents">
+    <p>Gets the Current Torrent List.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('Transmission List Torrents',{
+        category: 'advanced',
+        color:"#C0DEED",
+        defaults: {
+            config: {type:"transmission-config",required:true},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "transmission.png",
+        label: function() {
+            return this.name ? this.name : "Transmission";
+        }
+    });
+</script>
+
+
+<script type="text/x-red" data-template-name="Transmission Add Torrent">
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-user"></i> Transmission API</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <div class="form-row node-input-url">
+         <label for="node-input-url"><i class="fa fa-tag"></i> Url</label>
+         <input type="text" id="node-input-url" placeholder="url">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Transmission Add Torrent">
+    <p>Add a new Torrent via URL.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('Transmission Add Torrent',{
+        category: 'advanced',
+        color:"#C0DEED",
+        defaults: {
+            config: {type:"transmission-config",required:true},
+            url: {value: "",required:true},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "transmission.png",
+        label: function() {
+            return this.name ? this.name : "TransmissonTorrentAdd";
+        }
+    });
+</script>
+
