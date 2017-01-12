@@ -26,7 +26,7 @@ module.exports = function(RED) {
             this.Transmission = require("transmission");
             this.TransmissionAPI = new this.Transmission({
                 host: this.credentials.hostname,
-                port: '9091'
+                port: this.credentials.port
             });
             
             node.log( "Reauthenticating Transmission API with " + this.credentials.hostname );
