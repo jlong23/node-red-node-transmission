@@ -27,8 +27,8 @@ module.exports = function(RED) {
             this.TransmissionAPI = new this.Transmission({
                 host: this.credentials.hostname,
                 port: this.credentials.portnum,
-					 username: this.credentials.username,
-					 password: this.credentials.password
+                username: this.credentials.username,
+                password: this.credentials.password
             });
             
             node.log( "Reauthenticating Transmission API with " + this.credentials.hostname );
