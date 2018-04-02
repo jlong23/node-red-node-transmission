@@ -1,9 +1,9 @@
 {
   "name": "node-red-node-transmission",
-  "version": "0.0.1",
-  "description": "A Node-RED node to access Transmission Remote API.",
+  "version": "0.1.0",
+  "description": "A Node-RED node to access and control the Transmission torrent client Remote API.",
   "dependencies": {
-    "transmission": "0.4.2"
+    "transmission": "0.4.9"
   },
   "repository": {
     "type": "git",
@@ -12,18 +12,27 @@
   "license": "Apache-v2.0",
   "keywords": [
     "node-red",
-    "transmission"
+    "transmission",
+    "torrent"
   ],
   "node-red": {
     "nodes": {
       "Transmission-API": "transmission.js"
     }
   },
+  "author":
+    {
+      "name": "Jay Long"
+    },
   "contributors": [
     {
       "name": "Jay Long"
+    },
+    {
+      "name": "Mark Funston",
+      "email": "mlfunston@gmail.com",
+      "url": "https://github.com/mlfunston"
     }
-  ],
-  "readme": "node-red-node-transmission\n====================\n\n",
-  "readmeFilename": "README.md"  
+  ]
+
 }
