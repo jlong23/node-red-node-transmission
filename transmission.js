@@ -93,19 +93,24 @@ module.exports = function(RED) {
         var node = this;
         var TransmissionAPI = this.config ? this.config.TransmissionAPI : null;
 
-	if (!TransmissionAPI) {
+	    if (!TransmissionAPI) {
             node.warn("Missing Transmission credentials");
             node.status({fill:"red",shape:"ring",text:"Missing Transmission credentials"});
             return;
         }
 
-        this.url = n.url || msg.url || "";
+        //this.url = n.url || msg.url || "";
 
         node.status({});
         node.on("input", function(msg) {
+            node.log("Entering Add Torrent section");
             node.status({fill:"blue",shape:"dot",text:"Calling Transmission"});
+            var url;
+            var msg2 = {};
+            url = msg.url || n.url;
+            node.log(url);
 
-            TransmissionAPI.addUrl( this.url,function(err, result) {
+            TransmissionAPI.addUrl(url,function(err, result) {
                 if (err) {
                     node.error("failed to add Torrent Url : " + err);
                     node.log( JSON.stringify( err ));
@@ -130,4 +135,52 @@ module.exports = function(RED) {
     }
     RED.nodes.registerType("Transmission Add Torrent", TransmissonTorrentAdd);
    
+    function TransmissonTorrentRemove(n) {
+        RED.nodes.createNode(this,n);
+        this.config = RED.nodes.getNode(n.config);
+        var node = this;
+        var TransmissionAPI = this.config ? this.config.TransmissionAPI : null;
+
+	if (!TransmissionAPI) {
+            node.warn("Missing Transmission credentials");
+            node.status({fill:"red",shape:"ring",text:"Missing Transmission credentials"});
+            return;
+        }
+
+        //this.url = n.url || msg.url || "";
+
+        node.status({});
+        node.on("input", function(msg) {
+            node.log("Entering Remove Torrent section");
+            node.status({fill:"blue",shape:"dot",text:"Calling Transmission"});
+            var ids;
+            var msg2 = {};
+            ids = msg.ids || n.ids;
+            node.log(ids);
+
+            TransmissionAPI.remove(ids,function(err, result) {
+                if (err) {
+                    node.error("failed to select Torrent ids : " + err);
+                    node.log( JSON.stringify( err ));
+                    
+                    node.status({fill:"red",shape:"ring",text:"error"});
+                    return;
+                }
+        
+                node.status({});
+    
+                node.status({fill:"green",shape:"dot",text:"processing"});
+    
+                msg.topic = "/transmission.v1/torrentRemove";
+                msg.payload = result;
+                node.send(msg);
+    
+                node.status({});
+
+            })
+        })
+
+    }
+    RED.nodes.registerType("Transmission Remove Torrent", TransmissonTorrentRemove);
+
 }

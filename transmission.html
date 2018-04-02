@@ -39,6 +39,10 @@
 
 <script type="text/x-red" data-template-name="Transmission List Torrents">
     <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
         <label for="node-input-config"><i class="fa fa-user"></i> Transmission API</label>
         <input type="text" id="node-input-config">
     </div>
@@ -52,7 +56,7 @@
 
 <script type="text/javascript">
     RED.nodes.registerType('Transmission List Torrents',{
-        category: 'advanced',
+        category: 'transmission',
         color:"#C0DEED",
         defaults: {
             config: {type:"transmission-config",required:true},
@@ -62,13 +66,17 @@
         outputs:1,
         icon: "transmission.png",
         label: function() {
-            return this.name ? this.name : "Transmission";
+            return this.name||"List Torrents";
         }
     });
 </script>
 
 
 <script type="text/x-red" data-template-name="Transmission Add Torrent">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
     <div class="form-row">
         <label for="node-input-config"><i class="fa fa-user"></i> Transmission API</label>
         <input type="text" id="node-input-config">
@@ -87,19 +95,57 @@
 
 <script type="text/javascript">
     RED.nodes.registerType('Transmission Add Torrent',{
-        category: 'advanced',
+        category: 'transmission',
         color:"#C0DEED",
         defaults: {
             config: {type:"transmission-config",required:true},
-            url: {value: "",required:true},
+            url: {value: "",required:false},
             name: {value:""}
         },
         inputs:1,
         outputs:1,
         icon: "transmission.png",
         label: function() {
-            return this.name ? this.name : "TransmissonTorrentAdd";
+            return this.name||"Add Torrent";
         }
     });
 </script>
 
+<script type="text/x-red" data-template-name="Transmission Remove Torrent">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-user"></i> Transmission API</label>
+        <input type="text" id="node-input-config">
+    </div>
+    <div class="form-row node-input-ids">
+         <label for="node-input-ids"><i class="fa fa-tag"></i> Ids</label>
+         <input type="text" id="node-input-ids" placeholder="hashString">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Transmission Remove Torrent">
+    <p>Remove a torrent using the hashString value of a torrent in Transmission using 'msg.ids'.</p>
+    <p>Returns an empty object in msg.payload with a msg.topic of '/transmission.v1/torrentRemove'</p>
+    <p>See the 3.3 Torrent Accessors section of the RPC-Spec <a href="https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt" target="_blank">https://trac.transmissionbt.com/browser/trunk/extras/rpc-spec.txt</a>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('Transmission Remove Torrent',{
+        category: 'transmission',
+        color:"#C0DEED",
+        defaults: {
+            config: {type:"transmission-config",required:true},
+            ids: {value: "",required:false},
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "transmission.png",
+        label: function() {
+            return this.name||"Remove Torrent";
+        }
+    });
+</script>
